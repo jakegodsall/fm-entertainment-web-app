@@ -1,12 +1,14 @@
-package com.jakegodsall.fmentertainmentwebappbackend.entity;
+package com.jakegodsall.fmentertainmentwebappbackend.entity.security;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.jakegodsall.fmentertainmentwebappbackend.entity.BaseEntity;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,7 +17,7 @@ import lombok.*;
 @Builder
 @Entity
 @Table(name = "user")
-public class User extends BaseUser {
+public class User extends BaseEntity {
 
     @Size(max = 100)
     @NotNull
@@ -42,5 +44,16 @@ public class User extends BaseUser {
 
     @Builder.Default
     private Boolean isEnabled = true;
+
+    @ManyToMany(
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST},
+            fetch = FetchType.EAGER
+    )
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    Set<Role> roles = new HashSet<>();
 
 }
