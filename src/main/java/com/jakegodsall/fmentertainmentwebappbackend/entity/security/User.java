@@ -45,6 +45,7 @@ public class User extends BaseEntity {
     @Builder.Default
     private Boolean isEnabled = true;
 
+    @Singular
     @ManyToMany(
             cascade = {CascadeType.MERGE, CascadeType.PERSIST},
             fetch = FetchType.EAGER
@@ -55,5 +56,8 @@ public class User extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     Set<Role> roles = new HashSet<>();
+
+    @Transient
+    private Set<Authority> authorities = new HashSet<>();
 
 }
