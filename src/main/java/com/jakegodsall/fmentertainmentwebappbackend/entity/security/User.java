@@ -60,4 +60,8 @@ public class User extends BaseEntity {
     @Transient
     private Set<Authority> authorities = new HashSet<>();
 
+    @Override
+    public String toString() {
+        return username;
+    }
 }

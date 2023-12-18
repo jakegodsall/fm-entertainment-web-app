@@ -22,4 +22,8 @@ public class Authority extends BaseEntity {
     @Column(length = 100, unique = true, nullable = false)
     private String permission;
 
+    @Override
+    public String toString() {
+        return permission;
+    }
 }

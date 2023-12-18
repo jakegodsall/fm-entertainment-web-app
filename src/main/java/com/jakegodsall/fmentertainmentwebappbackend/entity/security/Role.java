@@ -34,4 +34,8 @@ public class Role extends BaseEntity {
                inverseJoinColumns = @JoinColumn(name = "authority_id"))
     Set<Authority> authorities = new HashSet<>();
 
+    @Override
+    public String toString() {
+        return name;
+    }
 }
