@@ -24,6 +24,7 @@ public class Role extends BaseEntity {
     @Column(length = 100, nullable = false, unique = true)
     private String name;
 
+    @Singular
     @ManyToMany(
             cascade = {CascadeType.MERGE, CascadeType.PERSIST},
             fetch = FetchType.EAGER

@@ -1,10 +1,9 @@
 package com.jakegodsall.fmentertainmentwebappbackend.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -21,10 +20,10 @@ public class BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @CreatedDate
+    @CreationTimestamp
     private LocalDateTime createdDate;
 
-    @LastModifiedDate
+    @UpdateTimestamp
     private LocalDateTime lastModifiedDate;
 
     @Version

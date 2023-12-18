@@ -16,7 +16,7 @@ public class GlobalSecurityConfig {
         return http
                 .authorizeHttpRequests(authorize -> {
                     authorize.requestMatchers("/**")
-                            .authenticated()
+                            .authenticated();
                 })
                 .csrf(csrf -> csrf.disable())
                 .httpBasic(Customizer.withDefaults())
