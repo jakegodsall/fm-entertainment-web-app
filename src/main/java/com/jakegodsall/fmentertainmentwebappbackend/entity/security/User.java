@@ -16,7 +16,10 @@ import java.util.Set;
 @Setter
 @Builder
 @Entity
-@Table(name = "user")
+@Table(name = "user",
+       uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"username", "email"})
+       })
 public class User extends BaseEntity {
 
     @Size(max = 100)

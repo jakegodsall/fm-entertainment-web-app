@@ -51,6 +51,7 @@ public class UserServiceImpl implements UserService {
     public UserDto updateUser(UserDto userDto, Long id) {
         // Create an updated user object
         User user = User.builder()
+                .
                 .username(userDto.getUsername())
                 .password(userDto.getPassword())
                 .email(userDto.getPassword())
@@ -65,7 +66,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(Long id) {
+    public void deleteUserById(Long id) {
         // Get the entity from the database
         User user = userRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundByIdException("User", id)
