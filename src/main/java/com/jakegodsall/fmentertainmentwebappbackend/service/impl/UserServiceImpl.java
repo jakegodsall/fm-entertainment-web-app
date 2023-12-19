@@ -6,8 +6,11 @@ import com.jakegodsall.fmentertainmentwebappbackend.mapper.UserMapper;
 import com.jakegodsall.fmentertainmentwebappbackend.payload.UserDto;
 import com.jakegodsall.fmentertainmentwebappbackend.repository.security.UserRepository;
 import com.jakegodsall.fmentertainmentwebappbackend.service.UserService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.mapper.Mapper;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -47,8 +50,14 @@ public class UserServiceImpl implements UserService {
         return UserMapper.userToUserDto(user);
     }
 
+    @Transactional
     @Override
     public UserDto updateUserById(UserDto userDto, Long id) {
+        // Get the user from the db
+        User userFromDb = userRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundByIdException("User", id)
+        );
+
         // Create an updated user object
         User user = User.builder()
                 .username(userDto.getUsername())
@@ -62,6 +71,26 @@ public class UserServiceImpl implements UserService {
 
         // Map saved user entity to DTO and return
         return UserMapper.userToUserDto(updatedUser);
+    }
+
+    @Override
+    public UserDto patchUpdateUserById(UserDto userDto, Long userId) {
+        User userFromDb = userRepository.findById(userId).orElseThrow(
+                () -> new ResourceNotFoundByIdException("User", userId)
+        );
+
+        if (StringUtils.hasText(userDto.getUsername()))
+            userFromDb.setUsername(userDto.getUsername());
+
+        if (StringUtils.hasText(userDto.getEmail()))
+            userFromDb.setEmail(userDto.getEmail());
+
+        if (StringUtils.hasText(userDto.getPassword()))
+            userFromDb.setPassword(userDto.getPassword());
+
+        User savedUser = userRepository.save(userFromDb);
+
+        return UserMapper.userToUserDto(savedUser);
     }
 
     @Override

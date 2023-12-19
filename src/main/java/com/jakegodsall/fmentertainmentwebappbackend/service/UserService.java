@@ -14,6 +14,8 @@ public interface UserService {
 
     UserDto updateUserById(UserDto userDto, Long id);
 
+    UserDto patchUpdateUserById(UserDto userDto, Long userId);
+
     void deleteUserById(Long id);
 
 }

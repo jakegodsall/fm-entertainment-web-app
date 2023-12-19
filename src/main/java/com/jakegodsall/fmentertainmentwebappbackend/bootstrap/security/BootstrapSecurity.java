@@ -45,6 +45,9 @@ public class BootstrapSecurity implements CommandLineRunner {
                 .authority(updateUser)
                 .authority(deleteUser)
                 .build();
+
+        if (roleRepository.count() == 0)
+            roleRepository.save(adminRole);
     }
 
     private void bootstrapAdminUser() {

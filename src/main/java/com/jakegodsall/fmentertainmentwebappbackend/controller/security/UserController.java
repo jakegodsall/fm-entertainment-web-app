@@ -51,6 +51,15 @@ public class UserController {
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 
+    @PatchMapping(USER_API_ENDPOINT_ID)
+    public ResponseEntity<UserDto> patchUpdateUserById(
+            @RequestBody UserDto userDto,
+            @PathVariable Long userId
+    ) {
+        UserDto updatedUser = userService.patchUpdateUserById(userDto, userId);
+        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+    }
+
     @DeleteMapping(USER_API_ENDPOINT_ID)
     public ResponseEntity<Void> deleteUserById(@PathVariable Long userId) {
         userService.deleteUserById(userId);
