@@ -48,10 +48,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto updateUser(UserDto userDto, Long id) {
+    public UserDto updateUserById(UserDto userDto, Long id) {
         // Create an updated user object
         User user = User.builder()
-                .
                 .username(userDto.getUsername())
                 .password(userDto.getPassword())
                 .email(userDto.getPassword())

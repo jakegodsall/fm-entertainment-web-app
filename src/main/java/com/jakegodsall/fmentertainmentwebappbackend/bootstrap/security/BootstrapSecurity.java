@@ -25,7 +25,9 @@ public class BootstrapSecurity implements CommandLineRunner {
     @Transactional
     @Override
     public void run(String... args) throws Exception {
-        bootstrapAuthoritiesAndRoles();
+        if (userRepository.count() == 0) {
+            bootstrapAuthoritiesAndRoles();
+        }
     }
 
     private void bootstrapAuthoritiesAndRoles() {
