@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
 public class JpaUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -32,7 +31,7 @@ public class JpaUserDetailsService implements UserDetailsService {
 
         return org.springframework.security.core.userdetails.User.builder()
                 .username(user.getUsername())
-                .password(passwordEncoder.encode(user.getPassword()))
+                .password(user.getPassword())
                 .accountExpired(!user.getIsAccountNonExpired())
                 .accountLocked(!user.getIsAccountNonLocked())
                 .credentialsExpired(!user.getIsCredentialNonExpired())

@@ -3,6 +3,7 @@ package com.jakegodsall.fmentertainmentwebappbackend.bootstrap.security;
 import com.jakegodsall.fmentertainmentwebappbackend.entity.security.Authority;
 import com.jakegodsall.fmentertainmentwebappbackend.entity.security.Role;
 import com.jakegodsall.fmentertainmentwebappbackend.entity.security.User;
+import com.jakegodsall.fmentertainmentwebappbackend.exceptions.ResourceNotFoundByNameException;
 import com.jakegodsall.fmentertainmentwebappbackend.repository.security.AuthorityRepository;
 import com.jakegodsall.fmentertainmentwebappbackend.repository.security.RoleRepository;
 import com.jakegodsall.fmentertainmentwebappbackend.repository.security.UserRepository;
@@ -25,9 +26,8 @@ public class BootstrapSecurity implements CommandLineRunner {
     @Transactional
     @Override
     public void run(String... args) throws Exception {
-        if (userRepository.count() == 0) {
-            bootstrapAuthoritiesAndRoles();
-        }
+        bootstrapAuthoritiesAndRoles();
+        bootstrapAdminUser();
     }
 
     private void bootstrapAuthoritiesAndRoles() {
@@ -45,6 +45,13 @@ public class BootstrapSecurity implements CommandLineRunner {
                 .authority(updateUser)
                 .authority(deleteUser)
                 .build();
+    }
+
+    private void bootstrapAdminUser() {
+        // Get the ADMIN role from the database
+        Role adminRole = roleRepository.findByName("ADMIN").orElseThrow(
+                () -> new ResourceNotFoundByNameException("Role", "name", "ADMIN")
+        );
 
         // Create admin user with ADMIN role
         User adminUser = User.builder()
@@ -54,6 +61,8 @@ public class BootstrapSecurity implements CommandLineRunner {
                 .role(adminRole)
                 .build();
 
-        userRepository.save(adminUser);
+        if (userRepository.count() == 0) {
+            userRepository.save(adminUser);
+        }
     }
 }
