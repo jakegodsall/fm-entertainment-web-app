@@ -8,7 +8,6 @@ import com.jakegodsall.fmentertainmentwebappbackend.repository.security.UserRepo
 import com.jakegodsall.fmentertainmentwebappbackend.service.UserService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.mapper.Mapper;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
