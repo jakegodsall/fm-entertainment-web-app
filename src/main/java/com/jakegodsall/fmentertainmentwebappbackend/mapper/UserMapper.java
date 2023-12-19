@@ -9,6 +9,7 @@ public class UserMapper {
     public static UserDto userToUserDto(User user) {
         return UserDto.builder()
                 .id(user.getId())
+                .version(user.getVersion())
                 .username(user.getUsername())
                 .password(user.getPassword())
                 .email(user.getEmail())
@@ -19,6 +20,7 @@ public class UserMapper {
     public static User userDtoToUser(UserDto userDto) {
         return User.builder()
                 .id(userDto.getId())
+                .version(userDto.getVersion())
                 .username(userDto.getUsername())
                 .password(userDto.getPassword())
                 .email(userDto.getEmail())

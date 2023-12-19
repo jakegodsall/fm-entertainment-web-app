@@ -1,9 +1,12 @@
 package com.jakegodsall.fmentertainmentwebappbackend.service.impl;
 
+import com.jakegodsall.fmentertainmentwebappbackend.entity.security.Role;
 import com.jakegodsall.fmentertainmentwebappbackend.entity.security.User;
 import com.jakegodsall.fmentertainmentwebappbackend.exceptions.ResourceNotFoundByIdException;
+import com.jakegodsall.fmentertainmentwebappbackend.exceptions.ResourceNotFoundByNameException;
 import com.jakegodsall.fmentertainmentwebappbackend.mapper.UserMapper;
 import com.jakegodsall.fmentertainmentwebappbackend.payload.UserDto;
+import com.jakegodsall.fmentertainmentwebappbackend.repository.security.RoleRepository;
 import com.jakegodsall.fmentertainmentwebappbackend.repository.security.UserRepository;
 import com.jakegodsall.fmentertainmentwebappbackend.service.UserService;
 import jakarta.transaction.Transactional;
@@ -11,12 +14,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.HashSet;
 import java.util.List;
 
 @RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
 
+    private final RoleRepository roleRepository;
     private final UserRepository userRepository;
 
     @Override
@@ -26,10 +31,21 @@ public class UserServiceImpl implements UserService {
                 .toList();
     }
 
+    @Transactional
     @Override
     public UserDto createUser(UserDto userDto) {
         // Create a user entity from DTO
         User user = UserMapper.userDtoToUser(userDto);
+
+        // Get the user role from the database
+        Role defaultUserRole = roleRepository.findByName("USER").orElseThrow(
+                () -> new ResourceNotFoundByNameException("Role", "name", "USER")
+        );
+
+        System.out.println("UserDto" + userDto);
+
+        user.setRoles(new HashSet<>());
+        user.getRoles().add(defaultUserRole);
 
         // Save the entity to the db
         User savedUser = userRepository.save(user);

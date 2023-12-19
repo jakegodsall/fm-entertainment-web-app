@@ -29,6 +29,7 @@ public class BaseEntity {
     private LocalDateTime lastModifiedDate;
 
     @Version
-    private Long version;
+    @Builder.Default
+    private Long version = 0L;
 
 }
