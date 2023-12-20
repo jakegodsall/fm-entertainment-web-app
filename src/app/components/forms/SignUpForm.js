@@ -1,11 +1,39 @@
+"use client";
+
+import React, { useState } from "react";
+
 import Link from "next/link";
 
 import Button from "../ui/Button";
 import FloatingLabelFormInput from "./FloatingLabelFormInput";
 
 export default function SignUpForm() {
+    const [enteredValues, setEnteredValues] = useState({
+        email: "",
+        password: "",
+        password2: "",
+    });
+
+    function onSubmit(event) {
+        event.preventDefault();
+
+        const fd = new FormData(event.target);
+        const dataObj = Object.fromEntries(fd.entries());
+
+        console.log(dataObj);
+    }
+
+    function handleInputChange(identifier, event) {
+        setEnteredValues((prevValues) => ({
+            ...prevValues,
+            [identifier]: event.target.value,
+        }));
+
+        console.log(enteredValues);
+    }
+
     return (
-        <form>
+        <form onSubmit={onSubmit}>
             <h1 className="mb-[4rem] text-[3.2rem] font-extralight tracking-[-0.05rem]">
                 Sign Up
             </h1>
@@ -14,16 +42,22 @@ export default function SignUpForm() {
                     htmlFor="email"
                     label="Email address"
                     type="text"
+                    onChange={handleInputChange}
+                    value={enteredValues.email}
                 />
                 <FloatingLabelFormInput
                     htmlFor="password"
                     label="Password"
                     type="password"
+                    onChange={handleInputChange}
+                    value={enteredValues.password}
                 />
                 <FloatingLabelFormInput
                     htmlFor="password2"
                     label="Repeat Password"
                     type="password"
+                    onChange={handleInputChange}
+                    value={enteredValues.password2}
                 />
             </div>
             <Button>Create an account</Button>
