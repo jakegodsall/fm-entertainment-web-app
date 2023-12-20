@@ -1,5 +1,6 @@
 package com.jakegodsall.fmentertainmentwebappbackend.controller.validation;
 
+import com.jakegodsall.fmentertainmentwebappbackend.exceptions.UsernameAlreadyTakenException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,12 @@ import java.util.Map;
 
 @ControllerAdvice
 public class CustomValidationController {
+
+    @ExceptionHandler(UsernameAlreadyTakenException.class)
+    public ResponseEntity<String> handleUsernameAlreadyTakenException(UsernameAlreadyTakenException ex) {
+        return ResponseEntity.badRequest().body(ex.getMessage());
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<List<Map<String, String>>> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
         List<Map<String, String>> errorList = exception.getFieldErrors().stream()

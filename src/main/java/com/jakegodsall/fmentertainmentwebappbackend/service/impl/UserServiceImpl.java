@@ -4,6 +4,7 @@ import com.jakegodsall.fmentertainmentwebappbackend.entity.security.Role;
 import com.jakegodsall.fmentertainmentwebappbackend.entity.security.User;
 import com.jakegodsall.fmentertainmentwebappbackend.exceptions.ResourceNotFoundByIdException;
 import com.jakegodsall.fmentertainmentwebappbackend.exceptions.ResourceNotFoundByNameException;
+import com.jakegodsall.fmentertainmentwebappbackend.exceptions.UsernameAlreadyTakenException;
 import com.jakegodsall.fmentertainmentwebappbackend.mapper.UserMapper;
 import com.jakegodsall.fmentertainmentwebappbackend.payload.UserDto;
 import com.jakegodsall.fmentertainmentwebappbackend.repository.security.RoleRepository;
@@ -34,8 +35,13 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public UserDto createUser(UserDto userDto) {
+        // Check if username already exists
+        if (!isUsernameAvailable(userDto.getUsername()))
+            throw new UsernameAlreadyTakenException(userDto.getUsername());
+
         // Create a user entity from DTO
         User user = UserMapper.userDtoToUser(userDto);
+
 
         // Get the user role from the database
         Role defaultUserRole = roleRepository.findByName("USER").orElseThrow(
@@ -117,5 +123,9 @@ public class UserServiceImpl implements UserService {
 
         // Delete the entity
         userRepository.delete(user);
+    }
+
+    private boolean isUsernameAvailable(String username) {
+        return !userRepository.existsByUsername(username);
     }
 }
