@@ -1,12 +1,20 @@
-export default function FloatingLabelFormInput({ htmlFor, label, type }) {
+export default function FloatingLabelFormInput({
+    htmlFor,
+    label,
+    type,
+    value,
+    onChange,
+}) {
     return (
         <div className="relative flex flex-col border-b-[0.1rem] border-grey-blue">
             <input
                 type={type}
-                name="email"
+                name={htmlFor}
                 className="peer block w-full appearance-none bg-inherit px-2.5 pb-2.5 pt-5 text-[1.5rem] text-gray-900 text-grey-blue focus:outline-none focus:ring-0 dark:text-white dark:focus:border-blue-500"
                 placeholder=" "
                 id={htmlFor}
+                onChange={(event) => onChange(htmlFor, event)}
+                value={value}
             />
             <label
                 htmlFor={htmlFor}
