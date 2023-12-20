@@ -40,7 +40,7 @@ git clone https://github.com/jakegodsall/fm-entertainment-app-backend.git
 ```
 
 2. Navigate to the project directory:
-
+q
 ```shell
 cd fm-entertainment-web-app-backend
 ```

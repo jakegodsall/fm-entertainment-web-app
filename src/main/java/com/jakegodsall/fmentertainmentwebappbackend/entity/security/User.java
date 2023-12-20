@@ -3,6 +3,7 @@ package com.jakegodsall.fmentertainmentwebappbackend.entity.security;
 
 import com.jakegodsall.fmentertainmentwebappbackend.entity.BaseEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -23,17 +24,22 @@ import java.util.Set;
        })
 public class User extends BaseEntity {
 
-    @Size(max = 100)
-    @NotNull
+    @Size(
+            min = 10,
+            max = 100,
+            message = "Username must be between 10 and 100 characters"
+    )
+    @NotNull(message = "Username is mandatory")
     @Column(length = 100, unique = true, nullable = false)
     private String username;
 
-    @NotNull
+    @NotNull(message = "Password is mandatory")
     @Column(nullable = false)
     private String password;
 
+    @Email(message = "Email must be valid")
     @Size(max = 100)
-    @NotNull
+    @NotNull(message = "email is mandatory")
     @Column(length = 100, unique = true, nullable = false)
     private String email;
 
