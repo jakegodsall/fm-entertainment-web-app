@@ -32,8 +32,8 @@ export default function FloatingLabelFormInput({
             <div
                 className={
                     errorFlag
-                        ? "h-[2.5rem] transition-all duration-500"
-                        : "h-0 overflow-hidden transition-all duration-500"
+                        ? "h-[2.5rem] opacity-100 transition-all duration-500"
+                        : "h-0 overflow-hidden opacity-0 transition-all duration-500"
                 }
             >
                 <p className="px-[0.7rem] pt-[0.5rem] text-[1.2rem] text-primary-red">
