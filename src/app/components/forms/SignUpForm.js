@@ -6,24 +6,21 @@ import Link from "next/link";
 
 import Button from "../ui/Button";
 import FloatingLabelFormInput from "./FloatingLabelFormInput";
-import validateEmail from "@/utils/validators";
+import { validateEmail, validatePassword } from "@/utils/validators";
 
 export default function SignUpForm() {
     const [fieldValues, setFieldValues] = useState({
         email: {
             value: "",
             hasBeenEdited: false,
-            isValid: false,
         },
         password: {
             value: "",
             hasBeenEdited: false,
-            isValid: false,
         },
         password2: {
             value: "",
             hasBeenEdited: false,
-            isValid: false,
         },
     });
 
@@ -34,15 +31,24 @@ export default function SignUpForm() {
         const dataObj = Object.fromEntries(fd.entries());
     }
 
-    function handleOnBlur(identifier) {
-        setFieldValues((prevState) => ({
-            ...prevState,
-            [identifier]: {
-                ...prevState[identifier],
-                hasBeenEdited: true,
-            },
-        }));
-
+    function handleOnBlur(identifier, event) {
+        if (event.target.value === "") {
+            setFieldValues((prevState) => ({
+                ...prevState,
+                [identifier]: {
+                    ...prevState[identifier],
+                    hasBeenEdited: false,
+                },
+            }));
+        } else {
+            setFieldValues((prevState) => ({
+                ...prevState,
+                [identifier]: {
+                    ...prevState[identifier],
+                    hasBeenEdited: true,
+                },
+            }));
+        }
         console.log(fieldValues);
     }
 
@@ -59,6 +65,14 @@ export default function SignUpForm() {
     const emailIsInvalid =
         fieldValues.email.hasBeenEdited &&
         !validateEmail(fieldValues.email.value);
+
+    const passwordIsInvalid =
+        fieldValues.password.hasBeenEdited &&
+        !validatePassword(fieldValues.password.value);
+
+    const password2IsInvalid =
+        fieldValues.password2.hasBeenEdited &&
+        fieldValues.password.value !== fieldValues.password2.value;
 
     console.log(emailIsInvalid);
 
@@ -85,6 +99,8 @@ export default function SignUpForm() {
                     onBlur={handleOnBlur}
                     onChange={handleOnChange}
                     value={fieldValues.password.value}
+                    errorFlag={passwordIsInvalid}
+                    errorMessage="Password is invalid"
                 />
                 <FloatingLabelFormInput
                     htmlFor="password2"
@@ -93,6 +109,8 @@ export default function SignUpForm() {
                     onBlur={handleOnBlur}
                     onChange={handleOnChange}
                     value={fieldValues.password2.value}
+                    errorFlag={password2IsInvalid}
+                    errorMessage="The passwords must match"
                 />
             </div>
             <Button>Create an account</Button>
