@@ -115,10 +115,12 @@ export default function SignUpForm() {
             </div>
             <Button disabled={inputsInvalid}>Create an account</Button>
             <p className="mt-[2.4rem] text-center text-[1.5rem] font-extralight">
-                Already have an account?{" "}
-                <Link className="text-primary-red" href="/auth/login">
-                    Login
-                </Link>
+                Already have an account?
+                <span className="ml-[1rem]">
+                    <Link className="text-primary-red" href="/auth/login">
+                        Login
+                    </Link>
+                </span>
             </p>
         </form>
     );
