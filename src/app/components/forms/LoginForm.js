@@ -96,7 +96,7 @@ export default function LoginForm() {
             </div>
             <Button disabled={inputsInvalid}>Login to your account</Button>
             <p className="mt-[2.4rem] text-center text-[1.5rem] font-extralight">
-                Don't have an account?
+                Don&apos;t have an account?
                 <span className="ml-[1rem]">
                     <Link className="text-primary-red" href="/auth/signup">
                         Sign Up
