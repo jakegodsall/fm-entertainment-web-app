@@ -6,6 +6,7 @@ import Link from "next/link";
 
 import Button from "../ui/Button";
 import FloatingLabelFormInput from "./FloatingLabelFormInput";
+import validateEmail from "@/utils/validators";
 
 export default function SignUpForm() {
     const [fieldValues, setFieldValues] = useState({
@@ -55,7 +56,11 @@ export default function SignUpForm() {
         }));
     }
 
-    const emailIsInvalid = fieldValues.email.hasBeenEdited;
+    const emailIsInvalid =
+        fieldValues.email.hasBeenEdited &&
+        !validateEmail(fieldValues.email.value);
+
+    console.log(emailIsInvalid);
 
     return (
         <form onSubmit={handleOnSubmit}>
@@ -70,6 +75,8 @@ export default function SignUpForm() {
                     onBlur={handleOnBlur}
                     onChange={handleOnChange}
                     value={fieldValues.email.value}
+                    errorFlag={emailIsInvalid}
+                    errorMessage="Email is invalid"
                 />
                 <FloatingLabelFormInput
                     htmlFor="password"
