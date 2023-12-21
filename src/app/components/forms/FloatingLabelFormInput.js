@@ -3,6 +3,7 @@ export default function FloatingLabelFormInput({
     label,
     type,
     value,
+    onBlur,
     onChange,
 }) {
     return (
@@ -13,6 +14,7 @@ export default function FloatingLabelFormInput({
                 className="peer block w-full appearance-none bg-inherit px-2.5 pb-2.5 pt-5 text-[1.5rem] text-gray-900 text-grey-blue focus:outline-none focus:ring-0 dark:text-white dark:focus:border-blue-500"
                 placeholder=" "
                 id={htmlFor}
+                onBlur={() => onBlur(htmlFor, event)}
                 onChange={(event) => onChange(htmlFor, event)}
                 value={value}
             />

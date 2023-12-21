@@ -8,32 +8,57 @@ import Button from "../ui/Button";
 import FloatingLabelFormInput from "./FloatingLabelFormInput";
 
 export default function SignUpForm() {
-    const [enteredValues, setEnteredValues] = useState({
-        email: "",
-        password: "",
-        password2: "",
+    const [fieldValues, setFieldValues] = useState({
+        email: {
+            value: "",
+            hasBeenEdited: false,
+            isValid: false,
+        },
+        password: {
+            value: "",
+            hasBeenEdited: false,
+            isValid: false,
+        },
+        password2: {
+            value: "",
+            hasBeenEdited: false,
+            isValid: false,
+        },
     });
 
-    function onSubmit(event) {
+    function handleOnSubmit(event) {
         event.preventDefault();
 
         const fd = new FormData(event.target);
         const dataObj = Object.fromEntries(fd.entries());
-
-        console.log(dataObj);
     }
 
-    function handleInputChange(identifier, event) {
-        setEnteredValues((prevValues) => ({
-            ...prevValues,
-            [identifier]: event.target.value,
+    function handleOnBlur(identifier) {
+        setFieldValues((prevState) => ({
+            ...prevState,
+            [identifier]: {
+                ...prevState[identifier],
+                hasBeenEdited: true,
+            },
         }));
 
-        console.log(enteredValues);
+        console.log(fieldValues);
     }
 
+    function handleOnChange(identifier, event) {
+        setFieldValues((prevValues) => ({
+            ...prevValues,
+            [identifier]: {
+                ...prevValues[identifier],
+                value: event.target.value,
+            },
+        }));
+    }
+
+    const emailIsInvalid = fieldValues.email.hasBeenEdited;
+
     return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={handleOnSubmit}>
             <h1 className="mb-[4rem] text-[3.2rem] font-extralight tracking-[-0.05rem]">
                 Sign Up
             </h1>
@@ -42,22 +67,25 @@ export default function SignUpForm() {
                     htmlFor="email"
                     label="Email address"
                     type="text"
-                    onChange={handleInputChange}
-                    value={enteredValues.email}
+                    onBlur={handleOnBlur}
+                    onChange={handleOnChange}
+                    value={fieldValues.email.value}
                 />
                 <FloatingLabelFormInput
                     htmlFor="password"
                     label="Password"
                     type="password"
-                    onChange={handleInputChange}
-                    value={enteredValues.password}
+                    onBlur={handleOnBlur}
+                    onChange={handleOnChange}
+                    value={fieldValues.password.value}
                 />
                 <FloatingLabelFormInput
                     htmlFor="password2"
                     label="Repeat Password"
                     type="password"
-                    onChange={handleInputChange}
-                    value={enteredValues.password2}
+                    onBlur={handleOnBlur}
+                    onChange={handleOnChange}
+                    value={fieldValues.password2.value}
                 />
             </div>
             <Button>Create an account</Button>
