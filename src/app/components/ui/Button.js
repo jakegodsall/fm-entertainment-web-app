@@ -1,12 +1,13 @@
-export default function Button({ children, handleFormDataSubmitted }) {
-    // const handleSubmit = (event) => {
-    //     handleFormDataSubmitted(event);
-    // };
-
+export default function Button({ children, disabled }) {
     return (
         <button
             type="submit"
-            className="w-full rounded-[0.6rem] bg-primary-red p-[1.4rem] text-[1.5rem] font-extralight"
+            disabled={disabled}
+            className={
+                disabled
+                    ? "w-full cursor-not-allowed rounded-[0.6rem] bg-primary-red p-[1.4rem] text-[1.5rem] font-extralight opacity-50"
+                    : "w-full cursor-pointer rounded-[0.6rem] bg-primary-red p-[1.4rem] text-[1.5rem] font-extralight"
+            }
         >
             {children}
         </button>

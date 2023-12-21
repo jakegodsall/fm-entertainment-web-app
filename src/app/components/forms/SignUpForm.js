@@ -49,7 +49,6 @@ export default function SignUpForm() {
                 },
             }));
         }
-        console.log(fieldValues);
     }
 
     function handleOnChange(identifier, event) {
@@ -74,7 +73,8 @@ export default function SignUpForm() {
         fieldValues.password2.hasBeenEdited &&
         fieldValues.password.value !== fieldValues.password2.value;
 
-    console.log(emailIsInvalid);
+    const inputsInvalid =
+        emailIsInvalid || passwordIsInvalid || password2IsInvalid;
 
     return (
         <form onSubmit={handleOnSubmit}>
@@ -113,7 +113,7 @@ export default function SignUpForm() {
                     errorMessage="The passwords must match"
                 />
             </div>
-            <Button>Create an account</Button>
+            <Button disabled={inputsInvalid}>Create an account</Button>
             <p className="mt-[2.4rem] text-center text-[1.5rem] font-extralight">
                 Already have an account?{" "}
                 <Link className="text-primary-red" href="/auth/login">

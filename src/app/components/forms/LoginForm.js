@@ -65,6 +65,8 @@ export default function LoginForm() {
         fieldValues.password.hasBeenEdited &&
         !validatePassword(fieldValues.password.value);
 
+    const inputsInvalid = emailIsInvalid || passwordIsInvalid;
+
     return (
         <form onSubmit={handleOnSubmit}>
             <h1 className="mb-[4rem] text-[3.2rem] font-extralight tracking-[-0.05rem]">
@@ -92,7 +94,7 @@ export default function LoginForm() {
                     errorMessage="Password is invalid"
                 />
             </div>
-            <Button>Login to your account</Button>
+            <Button disabled={inputsInvalid}>Login to your account</Button>
             <p className="mt-[2.4rem] text-center text-[1.5rem] font-extralight">
                 Don't have an account?{" "}
                 <Link className="text-primary-red" href="/auth/signup">
