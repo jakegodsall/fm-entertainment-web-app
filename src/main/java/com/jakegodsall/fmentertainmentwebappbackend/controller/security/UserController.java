@@ -1,13 +1,11 @@
 package com.jakegodsall.fmentertainmentwebappbackend.controller.security;
 
 import com.jakegodsall.fmentertainmentwebappbackend.payload.UserDto;
-import com.jakegodsall.fmentertainmentwebappbackend.service.UserService;
+import com.jakegodsall.fmentertainmentwebappbackend.service.security.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 

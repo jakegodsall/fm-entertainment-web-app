@@ -1,4 +1,4 @@
-package com.jakegodsall.fmentertainmentwebappbackend.service;
+package com.jakegodsall.fmentertainmentwebappbackend.service.security;
 
 import com.jakegodsall.fmentertainmentwebappbackend.payload.UserDto;
 

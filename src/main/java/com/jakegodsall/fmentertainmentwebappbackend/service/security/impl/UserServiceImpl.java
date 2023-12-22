@@ -1,4 +1,4 @@
-package com.jakegodsall.fmentertainmentwebappbackend.service.impl;
+package com.jakegodsall.fmentertainmentwebappbackend.service.security.impl;
 
 import com.jakegodsall.fmentertainmentwebappbackend.entity.security.Role;
 import com.jakegodsall.fmentertainmentwebappbackend.entity.security.User;
@@ -9,7 +9,7 @@ import com.jakegodsall.fmentertainmentwebappbackend.mapper.UserMapper;
 import com.jakegodsall.fmentertainmentwebappbackend.payload.UserDto;
 import com.jakegodsall.fmentertainmentwebappbackend.repository.security.RoleRepository;
 import com.jakegodsall.fmentertainmentwebappbackend.repository.security.UserRepository;
-import com.jakegodsall.fmentertainmentwebappbackend.service.UserService;
+import com.jakegodsall.fmentertainmentwebappbackend.service.security.UserService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

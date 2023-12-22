@@ -25,9 +25,9 @@ import java.util.Set;
 public class User extends BaseEntity {
 
     @Size(
-            min = 10,
+            min = 5,
             max = 100,
-            message = "Username must be between 10 and 100 characters"
+            message = "Username must be between 5 and 100 characters"
     )
     @NotNull(message = "Username is mandatory")
     @Column(length = 100, unique = true, nullable = false)
