@@ -29,11 +29,9 @@ public class Media extends BaseEntity {
     @Column(length = 200, nullable = false)
     private String title;
 
-    @JsonDeserialize(using = CategoryDeserializer.class)
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    @JsonDeserialize(using = RatingDeserializer.class)
     @Enumerated(EnumType.STRING)
     private Rating rating;
 
@@ -44,9 +42,9 @@ public class Media extends BaseEntity {
     @Column(nullable = false)
     private Integer year;
 
-    @Lob
-    @Column(name = "image", columnDefinition = "LONGBLOB")
-    private byte[] image;
+    @Size(max = 200)
+    @Column(length = 200, nullable = false)
+    private String imagePath;
 
     @Override
     public String toString() {

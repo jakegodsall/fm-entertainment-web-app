@@ -11,6 +11,7 @@ CREATE TABLE media
     rating             ENUM ("pg", "e", "eighteen_plus") NOT NULL,
     is_trending        BOOLEAN                                    DEFAULT FALSE,
     year               INT                               NOT NULL,
-    image              LONGBLOB
+    image_path         VARCHAR(200)                      NOT NULL
 );
+
 
