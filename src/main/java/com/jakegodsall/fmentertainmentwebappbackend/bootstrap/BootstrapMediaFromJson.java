@@ -27,21 +27,9 @@ public class BootstrapMediaFromJson implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
-//        bootstrapFromJson();
         bootstrapFromJsonUsingCustomObject();
     }
 
-
-    private void bootstrapFromJson() throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper()
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-        String jsonInput = new String(Files.readAllBytes(Paths.get("./data.json")));
-
-        List<Media> items = objectMapper.readValue(jsonInput,  new TypeReference<List<Media>>() {});
-
-        mediaRepository.saveAll(items);
-    }
 
     private void bootstrapFromJsonUsingCustomObject() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper()
