@@ -1,7 +1,10 @@
 package com.jakegodsall.fmentertainmentwebappbackend.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.jakegodsall.fmentertainmentwebappbackend.entity.enums.Category;
 import com.jakegodsall.fmentertainmentwebappbackend.entity.enums.Rating;
+import com.jakegodsall.fmentertainmentwebappbackend.json.CategoryDeserializer;
+import com.jakegodsall.fmentertainmentwebappbackend.json.RatingDeserializer;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -26,9 +29,11 @@ public class Media extends BaseEntity {
     @Column(length = 200, nullable = false)
     private String title;
 
+    @JsonDeserialize(using = CategoryDeserializer.class)
     @Enumerated(EnumType.STRING)
     private Category category;
 
+    @JsonDeserialize(using = RatingDeserializer.class)
     @Enumerated(EnumType.STRING)
     private Rating rating;
 
@@ -47,4 +52,5 @@ public class Media extends BaseEntity {
     public String toString() {
         return title;
     }
+
 }
