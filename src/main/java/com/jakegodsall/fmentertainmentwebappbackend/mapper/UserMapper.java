@@ -1,7 +1,7 @@
 package com.jakegodsall.fmentertainmentwebappbackend.mapper;
 
 import com.jakegodsall.fmentertainmentwebappbackend.entity.security.User;
-import com.jakegodsall.fmentertainmentwebappbackend.payload.UserDto;
+import com.jakegodsall.fmentertainmentwebappbackend.payload.security.UserDto;
 import org.springframework.stereotype.Component;
 
 @Component

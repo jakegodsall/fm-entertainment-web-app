@@ -1,6 +1,6 @@
 package com.jakegodsall.fmentertainmentwebappbackend.service.security;
 
-import com.jakegodsall.fmentertainmentwebappbackend.payload.UserDto;
+import com.jakegodsall.fmentertainmentwebappbackend.payload.security.UserDto;
 
 import java.util.List;
 

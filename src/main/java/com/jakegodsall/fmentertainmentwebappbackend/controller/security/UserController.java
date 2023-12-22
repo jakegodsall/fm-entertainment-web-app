@@ -1,6 +1,6 @@
 package com.jakegodsall.fmentertainmentwebappbackend.controller.security;
 
-import com.jakegodsall.fmentertainmentwebappbackend.payload.UserDto;
+import com.jakegodsall.fmentertainmentwebappbackend.payload.security.UserDto;
 import com.jakegodsall.fmentertainmentwebappbackend.service.security.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

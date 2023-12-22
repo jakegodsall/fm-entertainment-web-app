@@ -43,4 +43,8 @@ public class Media extends BaseEntity {
     @Column(name = "image", columnDefinition = "LONGBLOB")
     private byte[] image;
 
+    @Override
+    public String toString() {
+        return title;
+    }
 }

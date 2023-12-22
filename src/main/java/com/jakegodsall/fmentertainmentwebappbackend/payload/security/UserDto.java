@@ -1,4 +1,4 @@
-package com.jakegodsall.fmentertainmentwebappbackend.payload;
+package com.jakegodsall.fmentertainmentwebappbackend.payload.security;
 
 import com.jakegodsall.fmentertainmentwebappbackend.entity.security.Role;
 import jakarta.validation.constraints.Email;

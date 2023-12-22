@@ -6,7 +6,7 @@ import com.jakegodsall.fmentertainmentwebappbackend.exceptions.ResourceNotFoundB
 import com.jakegodsall.fmentertainmentwebappbackend.exceptions.ResourceNotFoundByNameException;
 import com.jakegodsall.fmentertainmentwebappbackend.exceptions.UniqueEntityFieldAlreadyTakenException;
 import com.jakegodsall.fmentertainmentwebappbackend.mapper.UserMapper;
-import com.jakegodsall.fmentertainmentwebappbackend.payload.UserDto;
+import com.jakegodsall.fmentertainmentwebappbackend.payload.security.UserDto;
 import com.jakegodsall.fmentertainmentwebappbackend.repository.security.RoleRepository;
 import com.jakegodsall.fmentertainmentwebappbackend.repository.security.UserRepository;
 import com.jakegodsall.fmentertainmentwebappbackend.service.security.UserService;
