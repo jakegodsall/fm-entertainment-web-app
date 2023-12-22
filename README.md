@@ -20,6 +20,7 @@ The backend is engineered using Java 21 and Spring Boot 3, providing a sturdy an
 * CRUD Operations: Complete set of create, read, update, and delete operations for managing movies and TV series.
 * Search Functionality: Enables users to search for relevant shows across the platform.
 * Bookmark Management: Allows users to add or remove bookmarks from movies and TV series.
+* Bootstrapped Media: The [data.json](./data.json) file provided in the challenge is bootstrapped to the database via Jackson deserialisation.
 
 ## Future Enhancements
 * JUnit and Mockito Tests: Plans are in place to incorporate extensive unit and integration testing using JUnit and Mockito.

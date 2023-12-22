@@ -1,6 +1,5 @@
 package com.jakegodsall.fmentertainmentwebappbackend.bootstrap;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,7 +12,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -29,7 +27,6 @@ public class BootstrapMediaFromJson implements CommandLineRunner {
     public void run(String... args) throws Exception {
         bootstrapFromJsonUsingCustomObject();
     }
-
 
     private void bootstrapFromJsonUsingCustomObject() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper()
