@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 
@@ -83,16 +84,17 @@ public class UserServiceImpl implements UserService {
                 () -> new ResourceNotFoundByIdException("User", id)
         );
 
-        // Create an updated user object
-        User user = User.builder()
-                .username(userDto.getUsername())
-                .password(userDto.getPassword())
-                .email(userDto.getPassword())
-                .roles(userDto.getRoles())
-                .build();
+        // Update last modified date to now
+        userFromDb.setLastModifiedDate(LocalDateTime.now());
+
+        // Update fields with values from DTO
+        userFromDb.setUsername(userDto.getUsername());
+        userFromDb.setPassword(userDto.getPassword());
+        userFromDb.setEmail(userDto.getEmail());
+        userFromDb.setRoles(userDto.getRoles());
 
         // Save the updated user to the database
-        User updatedUser = userRepository.save(user);
+        User updatedUser = userRepository.save(userFromDb);
 
         // Map saved user entity to DTO and return
         return UserMapper.userToUserDto(updatedUser);
