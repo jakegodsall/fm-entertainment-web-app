@@ -2,10 +2,7 @@ package com.jakegodsall.fmentertainmentwebappbackend.payload;
 
 import com.jakegodsall.fmentertainmentwebappbackend.entity.enums.Category;
 import com.jakegodsall.fmentertainmentwebappbackend.entity.enums.Rating;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -13,6 +10,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class MediaDto {
 
     private Long id;
@@ -20,6 +18,8 @@ public class MediaDto {
     private LocalDateTime createdDate;
 
     private LocalDateTime lastModifiedDate;
+
+    private String title;
 
     private Category category;
 

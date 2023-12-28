@@ -100,12 +100,15 @@ public class UserServiceImpl implements UserService {
         return UserMapper.userToUserDto(updatedUser);
     }
 
+    @Transactional
     @Override
     public UserDto patchUpdateUserById(UserDto userDto, Long userId) {
+        // Get the user from the db
         User userFromDb = userRepository.findById(userId).orElseThrow(
                 () -> new ResourceNotFoundByIdException("User", userId)
         );
 
+        // Update fields if field exists in DTO
         if (StringUtils.hasText(userDto.getUsername()))
             userFromDb.setUsername(userDto.getUsername());
 
@@ -115,8 +118,10 @@ public class UserServiceImpl implements UserService {
         if (StringUtils.hasText(userDto.getPassword()))
             userFromDb.setPassword(userDto.getPassword());
 
+        // Save the updated user to the database
         User savedUser = userRepository.save(userFromDb);
 
+        // Map saved user entity to DTO and return
         return UserMapper.userToUserDto(savedUser);
     }
 
