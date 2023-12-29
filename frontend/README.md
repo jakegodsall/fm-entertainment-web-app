@@ -1,7 +1,5 @@
 # Entertainment Web App Frontend (Frontend Mentor)
 
-![Project Image](project-image-url)
-
 ## Overview
 
 This is my solution for the [Entertainment web app](https://www.frontendmentor.io/challenges/entertainment-web-app-J-UhgAW1X) challenge from Frontend Mentor. The project is built using React.js, Next.js, and Tailwind CSS for the frontend. Additionally, a supplementary backend has been developed using Spring Boot, which can be found [here](https://github.com/jakegodsall/fm-entertainment-web-app-backend).
@@ -53,8 +51,4 @@ To start the development server, run:
 npm run dev
 ```
 
-The app will be available at http://localhost:3000.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](https://github.com/jakegodsall/fm-entertainment-web-app-frontend/blob/main/LICENSE) file for details.
+The frontend app will be available at http://localhost:3000.
