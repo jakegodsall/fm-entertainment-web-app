@@ -1,0 +1,33 @@
+version: '2.1'
+
+services:
+  backend:
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/backend
+      - maven_cache:/root/.m2
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    depends_on:
+      - mysql_db
+
+  mysql_db:
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=fm_entertainment_db
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_USER=admin_user
+      - MYSQL_PASSWORD=password
+    volumes:
+      - db_data:/var/lib/mysql
+    container_name: mysql_db
+
+volumes:
+  db_data:
+  maven_cache:
