@@ -1,22 +1,31 @@
-version: '2.1'
+version: '3'
 
 services:
   backend:
     build:
       context: backend
-      dockerfile: Dockerfile
+      dockerfile: prod.Dockerfile
+    image:
+      fm_entertainment_backend:latest
+    networks:
+      - fm_entertainment_web_app
     ports:
       - "8080:8080"
     volumes:
-      - .:/backend
       - maven_cache:/root/.m2
     environment:
-      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_PROFILES_ACTIVE=prod
+      - JDBC_URL=jdbc:mysql://mysql_db:3306/database?autoReconnect=true&useSSL=false
     depends_on:
       - mysql_db
 
+
+    container_name: fm_entertainment_web_app_backend
+
   mysql_db:
     image: mysql
+    networks:
+      - fm_entertainment_web_app
     ports:
       - "3306:3306"
     environment:
@@ -27,7 +36,15 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     container_name: mysql_db
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+      interval: 5s
+      timeout: 5s
+      retries: 55
 
 volumes:
   db_data:
   maven_cache:
+
+networks:
+  fm_entertainment_web_app:
