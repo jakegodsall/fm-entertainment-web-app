@@ -25,7 +25,7 @@ public class BootstrapMediaFromJson implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
-        bootstrapFromJsonUsingCustomObject();
+//        bootstrapFromJsonUsingCustomObject();
     }
 
     private void bootstrapFromJsonUsingCustomObject() throws IOException {
